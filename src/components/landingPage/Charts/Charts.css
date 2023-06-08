@@ -1,0 +1,12 @@
+.chartsMapWrapper{
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+.chartsMapWrapper img {
+    width: 600px;
+
+}

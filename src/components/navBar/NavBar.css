@@ -1,0 +1,96 @@
+/*This are styles for navbar*/
+.navBar {
+  background: var(--blue);
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--white);
+  padding: 0 60px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.logo {
+  cursor: pointer;
+}
+.logo > span {
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.linksContainer {
+    position: relative;
+  }
+  
+  .linksContainer > ul {
+    display: flex;
+    align-items: center;
+  }
+  
+  .linksContainer ul a {
+    margin-left: 10px;
+    color: white;
+    position: relative;
+    transition: all 480ms;
+  }
+  
+  .linksContainer ul a::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .linksContainer ul a:hover {
+    font-size: 18.7px;
+    color: lightblue;
+  }
+  
+  .linksContainer ul a:hover::before {
+    transform: scaleX(1);
+  }
+  
+
+
+.AuthButtonsContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .AuthButtonsContainer .AuthButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 480ms;
+  }
+  
+  #Signup{
+    background-color: var(--white);
+    color: var(--blue);
+    border-radius: 10px;
+    padding: 6.5px 10px;
+    margin-left: 10px;
+  }
+  #Signup:hover{
+    opacity: 0.5;
+    transition: all 480ms;
+  }
+
+  #Login:hover{
+    opacity: 0.5;
+    transition: all 480ms;
+  }

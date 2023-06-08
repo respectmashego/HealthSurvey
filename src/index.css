@@ -1,0 +1,32 @@
+:root{
+  --blue:#0079FF;
+  --white:white;
+  --dark-blue: #0058D1;
+  --light-blue:lightblue
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+

@@ -1,0 +1,9 @@
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: rgb(249, 249, 249);
+}
+.contentContainer {
+    flex: 1; /* Allow the content container to grow and take up remaining vertical space */
+  }
