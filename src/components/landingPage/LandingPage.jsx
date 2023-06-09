@@ -15,7 +15,7 @@ const LandingPage = () => {
               
             }} >SURVEY-ME</span> </h1>
             <p>Collect data door by door to make a difference!</p>
-            <Link to="/auth" className="cta-button" >Get Started</Link>
+            <Link to="/survey" className="cta-button" >Get Started</Link>
           </header>
         </div>
         <div className="right">
