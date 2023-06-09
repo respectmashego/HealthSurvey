@@ -1,0 +1,77 @@
+.survey-form {
+    min-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .survey-form h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .survey-form div {
+    margin-bottom: 15px;
+  }
+  
+  .survey-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .survey-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .survey-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color:var(--blue);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Additional styles for specific elements/questions */
+  
+  /* Example style for the question "What is the date of the interview?" */
+  .survey-form .date-question {
+    display: flex;
+    align-items: center;
+  }
+  
+  .survey-form .date-question label {
+    margin-right: 10px;
+  }
+  
+  .survey-form .date-question input[type="text"] {
+    width: 150px;
+  }
+  
+  /* Example style for the question "What is the first name of the person asking the questions?" */
+  .survey-form .person-name-question {
+    display: flex;
+    align-items: center;
+  }
+  
+  .survey-form .person-name-question label {
+    margin-right: 10px;
+  }
+  
+  .survey-form .person-name-question input[type="text"] {
+    flex: 1;
+  }
+  
+  /* More styles for other questions */
+  
+  

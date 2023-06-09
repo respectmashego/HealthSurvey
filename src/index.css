@@ -2,7 +2,8 @@
   --blue:#0079FF;
   --white:white;
   --dark-blue: #0058D1;
-  --light-blue:lightblue
+  --light-blue:lightblue;
+  --grey: rgb(249, 249, 249);
 }
 
 body,

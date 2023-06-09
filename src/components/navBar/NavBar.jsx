@@ -22,11 +22,11 @@ const Navbar = () => {
         <ul>{linkItems}</ul>
       </div>
       <div className="AuthButtonsContainer">
-        <Link to="/login" className="AuthButton" id="Login">
+        <Link to="/auth" className="AuthButton" id="Login">
           <FaSignInAlt className="ButtonIcon" />
           <span>Login</span>
         </Link>
-        <Link to="/signup" className="AuthButton" id="Signup">
+        <Link to="/auth" className="AuthButton" id="Signup">
           <FaUserPlus className="ButtonIcon" />
           <span>SignUp</span>
         </Link>
