@@ -3,43 +3,47 @@ import './SurveyForm.css';
 
 const SurveyForm = () => {
   const [step, setStep] = useState(1);
-  const [date, setDate] = useState('');
-  const [questionerFirstName, setQuestionerFirstName] = useState('');
-  const [questionerPhoneNumber, setQuestionerPhoneNumber] = useState('');
+  const [formData, setFormData] = useState({
+    date: '',
+    questionerFirstName: '',
+    questionerPhoneNumber: '',
+    numberOfChildren: 0,
+    children: [], // Array to store child details
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleNext = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+    setStep((prevStep) => prevStep + 1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Perform submission logic here
-    const data = {
-      date,
-      questionerFirstName,
-      questionerPhoneNumber,
-      // Add more properties for other questions
-    };
-
-    // Send data to the server using an API (replace <API_URL> with the actual URL)
+    // Send formData to the server using an API (replace <API_URL> with the actual URL)
     fetch('<API_URL>', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((response) => {
-        // Handle the response from the server
         console.log(response);
-        // Clear form inputs
-        setDate('');
-        setQuestionerFirstName('');
-        setQuestionerPhoneNumber('');
-        setStep(1); // Reset the form to the initial step
+        // Clear form inputs and reset step
+        setFormData({
+          date: '',
+          questionerFirstName: '',
+          questionerPhoneNumber: '',
+          numberOfChildren: 0,
+          children: [],
+        });
+        setStep(1);
       })
       .catch((error) => {
         // Handle any errors
@@ -56,18 +60,20 @@ const SurveyForm = () => {
               <label className="question-label">What is the date of the interview?</label>
               <input
                 type="text"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
                 required
                 className="question-input"
               />
             </div>
             <div className="question">
-              <label className="question-label">What is your first name?</label>
+              <label className="question-label">How many children do you have?</label>
               <input
-                type="text"
-                value={questionerFirstName}
-                onChange={(e) => setQuestionerFirstName(e.target.value)}
+                type="number"
+                name="numberOfChildren"
+                value={formData.numberOfChildren}
+                onChange={handleInputChange}
                 required
                 className="question-input"
               />
@@ -84,26 +90,75 @@ const SurveyForm = () => {
               <label className="question-label">What is your phone number?</label>
               <input
                 type="text"
-                value={questionerPhoneNumber}
-                onChange={(e) => setQuestionerPhoneNumber(e.target.value)}
+                name="questionerPhoneNumber"
+                value={formData.questionerPhoneNumber}
+                onChange={handleInputChange}
                 required
                 className="question-input"
               />
             </div>
-            {/* Add more questions for step 2 */}
+            {renderChildInputs()}
             <button type="submit" className="submit-button">
               Submit
             </button>
-            <button type="button" className="previous-button" onClick={() => setStep(step - 1)}>
+            <button type="button" className="previous-button" onClick={() => setStep((prevStep) => prevStep - 1)}>
               Previous
             </button>
           </>
         );
-      // Add more cases for additional steps/questions
       default:
         return null;
     }
   };
+
+// Inside the renderChildInputs function
+const renderChildInputs = () => {
+  const { numberOfChildren } = formData;
+
+  if (numberOfChildren > 0) {
+    const childInputs = [];
+
+    for (let i = 0; i < numberOfChildren; i++) {
+      const childIndex = i;
+      const childName = `childName_${childIndex}`;
+
+      childInputs.push(
+        <div key={childIndex}>
+          <h3>Child {childIndex + 1}</h3>
+          <div className="question">
+            <label className="question-label">Child's Name:</label>
+            <input
+              type="text"
+              name={childName}
+              value={formData.children[childIndex]?.childName || ''}
+              onChange={(e) => handleChildInputChange(childIndex, e)}
+              required
+              className="question-input"
+            />
+          </div>
+          {/* Add more questions for each child */}
+        </div>
+      );
+    }
+
+    return childInputs;
+  }
+
+  return null;
+};
+
+
+// Inside the handleChildInputChange function
+const handleChildInputChange = (childIndex, e) => {
+  const { name, value } = e.target;
+  const updatedChildren = [...formData.children];
+  updatedChildren[childIndex] = { ...updatedChildren[childIndex], childName: value };
+  setFormData((prevData) => ({
+    ...prevData,
+    children: updatedChildren,
+  }));
+};
+
 
   return (
     <form className="survey-form" onSubmit={handleSubmit}>
