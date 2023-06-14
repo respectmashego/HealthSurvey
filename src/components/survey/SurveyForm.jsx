@@ -23,6 +23,8 @@ const SurveyForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
+   
 
     // Send formData to the server using an API (replace <API_URL> with the actual URL)
     fetch('<API_URL>', {
@@ -98,11 +100,11 @@ const SurveyForm = () => {
               />
             </div>
             {renderChildInputs()}
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
             <button type="button" className="previous-button" onClick={() => setStep((prevStep) => prevStep - 1)}>
               Previous
+            </button>
+            <button type="submit" className="submit-button">
+              Submit
             </button>
           </>
         );
@@ -111,54 +113,50 @@ const SurveyForm = () => {
     }
   };
 
-// Inside the renderChildInputs function
-const renderChildInputs = () => {
-  const { numberOfChildren } = formData;
+  const renderChildInputs = () => {
+    const { numberOfChildren } = formData;
 
-  if (numberOfChildren > 0) {
-    const childInputs = [];
+    if (numberOfChildren > 0) {
+      const childInputs = [];
 
-    for (let i = 0; i < numberOfChildren; i++) {
-      const childIndex = i;
-      const childName = `childName_${childIndex}`;
+      for (let i = 0; i < numberOfChildren; i++) {
+        const childIndex = i;
+        const childName = `childName_${childIndex}`;
 
-      childInputs.push(
-        <div key={childIndex}>
-          <h3>Child {childIndex + 1}</h3>
-          <div className="question">
-            <label className="question-label">Child's Name:</label>
-            <input
-              type="text"
-              name={childName}
-              value={formData.children[childIndex]?.childName || ''}
-              onChange={(e) => handleChildInputChange(childIndex, e)}
-              required
-              className="question-input"
-            />
+        childInputs.push(
+          <div key={childIndex}>
+            <h3>Child {childIndex + 1}</h3>
+            <div className="question">
+              <label className="question-label">Child's Name:</label>
+              <input
+                type="text"
+                name={childName}
+                value={formData.children[childIndex]?.childName || ''}
+                onChange={(e) => handleChildInputChange(childIndex, e)}
+                required
+                className="question-input"
+              />
+            </div>
+            {/* Add more questions for each child */}
           </div>
-          {/* Add more questions for each child */}
-        </div>
-      );
+        );
+      }
+
+      return childInputs;
     }
 
-    return childInputs;
-  }
+    return null;
+  };
 
-  return null;
-};
-
-
-// Inside the handleChildInputChange function
-const handleChildInputChange = (childIndex, e) => {
-  const { name, value } = e.target;
-  const updatedChildren = [...formData.children];
-  updatedChildren[childIndex] = { ...updatedChildren[childIndex], childName: value };
-  setFormData((prevData) => ({
-    ...prevData,
-    children: updatedChildren,
-  }));
-};
-
+  const handleChildInputChange = (childIndex, e) => {
+    const { name, value } = e.target;
+    const updatedChildren = [...formData.children];
+    updatedChildren[childIndex] = { ...updatedChildren[childIndex], childName: value };
+    setFormData((prevData) => ({
+      ...prevData,
+      children: updatedChildren,
+    }));
+  };
 
   return (
     <form className="survey-form" onSubmit={handleSubmit}>
